@@ -134,7 +134,7 @@ class Client:
             self._nc = nats
             # NATS Streaming client should use same event loop
             # as the borrowed NATS connection.
-            self._loop = self._nc._loop
+            self._loop = asyncio.get_event_loop()
         else:
             if self._nc is None:
                 self._nc = NATS()
