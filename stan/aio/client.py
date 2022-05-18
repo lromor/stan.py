@@ -151,7 +151,7 @@ class Client:
 
         # Pending pub acks inflight
         self._pending_pub_acks_queue = asyncio.Queue(
-            maxsize=max_pub_acks_inflight, loop=self._loop)
+            maxsize=max_pub_acks_inflight)
 
         # Heartbeats subscription
         self._hb_inbox_sid = await self._nc.subscribe(
@@ -462,7 +462,7 @@ class Client:
         self._sub_map[sub.inbox] = sub
 
         # Have the message processing queue ready before making the subscription.
-        sub._msgs_queue = asyncio.Queue(maxsize=pending_limits, loop=self._loop)
+        sub._msgs_queue = asyncio.Queue(maxsize=pending_limits)
 
         # Helper coroutine which will just put messages in to the queue,
         # whenever the NATS client receives a message.
